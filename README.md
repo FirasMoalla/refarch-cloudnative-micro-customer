@@ -53,7 +53,7 @@ The Customer Microservice REST API is OAuth protected.
 
 ### Register on IBM Cloud
 
-Click [here](http://ibm.biz/msworkshop) to register an account on IBM Cloud. 
+Click on [here](http://ibm.biz/msworkshop) to register an account on IBM Cloud. 
 
 ### Deploy a Kubernetes Cluster on IBM Cloud
 
