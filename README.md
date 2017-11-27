@@ -62,8 +62,8 @@ Follow the steps below to deploy a Kubernetes cluser on IBM Cloud.
 1. Login to your IBM Cloud account
 2. Open the browser to create Kubernetes Cluster Service using this link [https://console.bluemix.net/containers-kubernetes/catalogCluster](https://console.bluemix.net/containers-kubernetes/catalogCluster)
 3. Click on `Create`
-4. For testing, you can select the "Lite" plan 
-5. Name your cluster `mycluster` in the `Cluster Name' field
+4. For testing, you can select the `Lite plan`
+5. Name your cluster `mycluster` in the `Cluster Name` field
 6. Create the cluster by clicking on `Create Cluster`  
 7. Once the service has been created, IBM Cloud will start deploying your cluster. Click on `Overview` to monitor the status of the cluter deployment.
 8. Continue the lab as deplying a cluster might take some time
