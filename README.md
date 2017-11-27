@@ -86,7 +86,7 @@ Install the [bx CLI](https://clis.ng.bluemix.net/ui/home.html), the Bluemix cont
 
 ```
 # bx plugin install container-service -r Bluemix
-# bx plugin install conatiner-registry -r Bluemix
+# bx plugin install container-registry -r Bluemix
 ```
 
 ### Install kubectl
@@ -218,7 +218,7 @@ The service can be packaged as a Docker container and deployed to a Kubernetes c
    ```
    # ./gradlew docker
    # cd docker
-   # docker build -t customer-microservice .
+   # docker build -t customer-microservice
    ```
 
 ### Push the Docker image to the Bluemix private container registry
