@@ -49,13 +49,38 @@ The Customer Microservice REST API is OAuth protected.
   - Delete a customer record.  The caller of this API must pass a valid OAuth token with the scope `blue`.  If the `id` matches the customer ID passed in the `user_name` claim in the JWT, the customer object is deleted; otherwise `HTTP 401` is returned.  This API is currently not called as it is not a function of the BlueCompute application.
 
 
-## Pre-requisites
+## Microservices Lab
+
+### Register on IBM Cloud
+
+Click [http://ibm.biz/msworksho](here) to register an account on IBM Cloud. 
+
+### Deploy a Kubernetes Cluster on IBM Cloud
+
+Follow the steps below to deploy a Kubernetes cluser on IBM Cloud.
+
+1. Login to your IBM Cloud account
+2. Open the browser to create Kubernetes Cluster Service using this link [https://console.bluemix.net/containers-kubernetes/catalogCluster](https://console.bluemix.net/containers-kubernetes/catalogCluster)
+3. Click on `Create`
+4. For testing, you can select the "Lite" plan 
+5. Name your cluster `mycluster` in the `Cluster Name' field
+6. Create the cluster by clicking on `Create Cluster`  
+7. Once the service has been created, IBM Cloud will start deploying your cluster. Click on `Overview` to monitor the status of the cluter deployment.
+8. Continue the lab as deplying a cluster might take some time
+
+### Clone the Customer Microservice
+
+Clone the Customer Microservices:
+
+```
+# git clone https://github.com/FirasMoalla/refarch-cloudnative-micro-customer
+```
 
 ### Install Docker
 
 Install [Docker](https://www.docker.com)
 
-### Install Bluemix CLI and IBM Container Service plugins
+### Install IBM Cloud CLI and IBM Container Service plugins
 
 Install the [bx CLI](https://clis.ng.bluemix.net/ui/home.html), the Bluemix container-registry Plugin and the Bluemix container-service plugin.  The plugins can be installed directly [here](http://plugins.ng.bluemix.net/ui/repository.html), or using the following commands:
 
@@ -72,11 +97,11 @@ Install the [kubectl CLI](https://kubernetes.io/docs/tasks/kubectl/install/) to 
 
 The customer microservice is packaged as a [Helm Chart](https://github.com/kubernetes/helm/blob/master/docs/charts.md).  Install the [helm CLI](https://github.com/kubernetes/helm/blob/master/docs/install.md).
 
-### Provision Cloudant Database in Bluemix
+### Provision Cloudant Database in IBM Cloud
 
 *Note that two components use Cloudant in BlueCompute, the Customer microservice and the [Social Review microservice](https://github.com/ibm-cloud-architecture/refarch-cloudnative-micro-socialreview).  If deploying both components to the same space, they can share the Cloudant database instance, as the Customer microservice saves documents to the `customers` database, and the Social Review microservice saves documents to the `socialreviewdb` and `socialreviewdb-staging` databases.*
 
-1. Login to your Bluemix console  
+1. Login to your IBM Cloud console  
 2. Open browser to create Cloudant Service using this link [https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db)  
 3. Name your Cloudant service name like `refarch-cloudantdb`  
 4. For testing, you can select the "Lite" plan, then click "Create"  
@@ -182,9 +207,9 @@ Verify the customer.  The caller identifies itself using the encoded `user_name`
 
 Note that *only* the customer object identified by the encoded `user_name` is returned to the caller.
 
-## Deploy to Bluemix
+## Deploy to IBM Cloud
 
-The service can be packaged as a Docker container and deployed to a Kubernetes cluster running on Bluemix.
+The service can be packaged as a Docker container and deployed to a Kubernetes cluster running on IBM Coud.
 
 ### Build Docker Container
 
@@ -198,7 +223,7 @@ The service can be packaged as a Docker container and deployed to a Kubernetes c
 
 ### Push the Docker image to the Bluemix private container registry
 
-1. Log into the Bluemix CLI
+1. Log into the IBM Cloud CLI
 
    ```
    # bx login
@@ -275,15 +300,15 @@ The service can be packaged as a Docker container and deployed to a Kubernetes c
      tag: latest
    ```
    
-   Additionally, if the Cloudant database service created earlier is not named `refarch-cloudantdb`, change the `cloudant.serviceName` value in the yaml.  Otherwise, the chart will attempt to create a new Cloudant instance in your Bluemix space called `refarch-cloudantdb`.
+   Additionally, if the Cloudant database service created earlier is not named `refarch-cloudantdb`, change the `cloudant.serviceName` value in the yaml.  Otherwise, the chart will attempt to create a new Cloudant instance in your IBM Cloud space called `refarch-cloudantdb`.
    
 8. Create the configmap and secrets
 
-   The chart depends on a Kubernetes [configmap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/) containing the Bluemix target.
+   The chart depends on a Kubernetes [configmap](https://kubernetes.io/docs/tasks/configure-pod-container/configmap/) containing the IBM Cloud target.
    
-   Update the config-map in `kubernetes/bluemix-target-configmap.yaml` to include your Bluemix account information.
+   Update the config-map in `kubernetes/bluemix-target-configmap.yaml` to include your IBM Cloud account information.
    
-   Additionally, the chart uses a Kubernetes [secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the Bluemix API key.  Use the following commands to generate one:
+   Additionally, the chart uses a Kubernetes [secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the IBM Cloud API key.  Use the following commands to generate one:
    
    ```
    # bx iam api-key-create my-kube-api-key
